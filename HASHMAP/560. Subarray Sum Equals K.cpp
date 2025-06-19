@@ -5,7 +5,30 @@ Example 1:
 Input:nums = [1,1,1], k = 2
 Output: 2
  */
- // Java solution
+
+#include <unordered_map>
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int count = 0;
+        int sum = 0;
+        unordered_map<int,int> map;
+        map[0] = 1; // sum: count bug forgot to initilize
+
+        for(int i = 0; i <(int)nums.size(); i++){
+            sum += nums[i];
+            if(map.find(sum- k) != map.end()){
+                count += map[sum- k];
+            }
+            //map[sum- k] += 1;
+            map[sum] ++;
+        }
+        return count;    
+    }
+};
+
+
+// Java solution
 //sol 1 brute force
 public class Solution {
     public int subarraySum(int[] nums, int k) {
